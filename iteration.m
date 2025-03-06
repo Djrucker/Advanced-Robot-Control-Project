@@ -5,8 +5,8 @@ R = [];
 for t= 1: 10
 sim('IterationExample.slx')
 Q=Qnew;
-x = Qnew(1,2,1,2,1,2)
-R = [R;ep_r] 
+x = Qnew(1,2,1,2,1,2);
+R = [R;ep_r]; 
 end
 
-plot(R)
+plot(R);
