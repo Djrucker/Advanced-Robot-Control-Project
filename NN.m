@@ -10,7 +10,9 @@ view(net);
 
 [Xs, Xi, Ai, Ts] = preparets(net,uanglecell, {}, yanglecell);
 [net,tr] = train(net,Xs, Ts, Xi, Ai); 
-
+netnodelay = removedelay(net); 
+% gensim(net); 
+gensim(netnodelay); 
 figure
 plotperform(tr); 
 hold off; 
