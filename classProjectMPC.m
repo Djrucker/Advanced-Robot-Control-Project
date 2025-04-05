@@ -35,13 +35,13 @@ load('plant_model_for_MPC.mat')
 %% Design the MPC Controller
 % Create the controller object with sampling period, prediction and control
 % horizons of 0.2 sec, 5 steps, and 2 moves, respectively;
-mpcobj = mpc(plant,0.2,8,4);
+mpcobj = mpc(plant,0.2,12,5);
 % best model so far is 0.175, 7, 3
 
 %%
 % Specify hard constraints on the manipulated variable.
-mpcobj.MV = struct('Min',{-0.4; -0.4; -0.0627; -0.1; -0.0777;-0.0777},...% 0.13 is the best for the 7/3
-    'Max',{0.4;0.4; 0.1; 0.1; 0.1; 0.1},...%0.12 i the best for the first iteration
+mpcobj.MV = struct('Min',{-1; -1; -0.0627; -0.2; -0.2;-0.0777},...% 0.13 is the best for the 7/3
+    'Max',{1;1; 0.1; 0.2; 0.2; 0.1},...%0.12 i the best for the first iteration
     'RateMin',{-500;-100; -100; -100; -100; -100},...
     'RateMax', {500; 100; 100; 100; 100; 100});
 
@@ -67,4 +67,4 @@ open_system(mdl1)
 
 %%
 % Run the closed loop simulation.
-sim(mdl1)
+sim(mdl1);
