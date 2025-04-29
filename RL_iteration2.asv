@@ -1,18 +1,17 @@
 clear; clc; close all; 
 
-if isfile('Qpos_lastiter.mat') && isfile('Qang_lastiter.mat')'
+if isfile('Qpos_lastiter.mat') && isfile('Qang_lastiter.mat')
     load('Qpos_lastiter.mat', 'Q_pos'); 
     load('Qang_lastiter.mat', 'Q_ang'); 
 else 
-    Q_pos = zeros(10, 10, 5, 5, 5, 5, 7, 7, 7); 
-    Q_ang = zeros(10, 10, 5, 5, 5, 5, 7, 7, 7);
+    Q_pos = zeros(50,50,3,5,5,5); 
+    Q_ang = zeros(50,50,3,3,3,3);
 
 end 
 
-gamma = 0.9; 
-alpha = 0.5; 
-total_episodes = 100; 
-
+gamma = 0.8; 
+alpha = 0.6; 
+total_episodes = 10; 
 load('squaretrajectory.mat'); 
 assignin('base', 'ref', ref);
 
@@ -23,15 +22,19 @@ for episode = 1:total_episodes
     assignin('base', 'Qang_lastiter', Q_ang); 
     assignin('base', 'gamma', gamma); 
     assignin('base', 'alpha', alpha); 
+    epsilon_start = 0.5;
+    epsilon_end = 0.05;
+    epsilon_decay_steps = total_episodes;  % Decay over all episodes
+    epsilon = max(epsilon_end, epsilon_start - (episode/epsilon_decay_steps)*(epsilon_start - epsilon_end));
+    assignin('base', 'epsilon', epsilon); 
 
     simOut = sim('RL_Project.slx', 'StopTime', '75'); 
 
-    Q_pos = evalin('base', 'Qpos_matrix'); 
-    Q_ang = evalin('base', 'Qang_matrix');
+    Q_pos = evalin('base', 'simOut.Qpos_matrix'); 
+    Q_ang = evalin('base', 'simOut.Qang_matrix');
 
     save('Qpos_lastiter.mat', 'Q_pos'); 
     save('Qang_lastiter.mat', 'Q_ang'); 
-    
 
 end
 
