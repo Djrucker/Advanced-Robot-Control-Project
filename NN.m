@@ -2,7 +2,7 @@
 %% that gets created and copy it directly into the project.slx file and run that to get the results from the simulation
 %% I already have some of the results graphs saved from running the simulation in the new folder that was added.
 
-load('training_data_cell.mat')
+% load('training_data_cell.mat')
 net = narxnet(1:2,1:2, 10); 
 % net = configure(net, uanglecell, yanglecell); 
 disp(net.outputs{end}.size); 
@@ -15,6 +15,12 @@ view(net);
 
 [Xs, Xi, Ai, Ts] = preparets(net,uanglecell, {}, yanglecell);
 [net,tr] = train(net,Xs, Ts, Xi, Ai); 
+%load another trajectory
+load('triangulartrajectory.mat'); 
+uanglecell = num2cell(uangle', 1); 
+yanglecell = num2cell(yangle', 1); 
+[Xs, Xi, Ai, Ts] = preparets(net, uanglecell, {}, yanglecell); 
+[net, tr] = train(net, Xs, Ts, Xi, Ai);
 netnodelay = removedelay(net); 
 % gensim(net); 
 gensim(netnodelay); 

@@ -53,7 +53,7 @@ for episode = 1:total_episodes
     total_reward_x(episode) = cumulative_x; 
     total_reward_y(episode) = cumulative_y; 
 
-    episode_reward_x(episode) = sum(simOut.reward_x); 
+    episode_reward_x(episode) = sum(simOut.reward_x); test the model to see how it performs with its default parameters 
     episode_reward_y(episode) = sum(simOut.reward_y); 
 
     if episode > 1

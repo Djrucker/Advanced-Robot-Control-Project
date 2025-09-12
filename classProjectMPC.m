@@ -1,4 +1,4 @@
-%% Model Predictive Control of a Multi-Input Multi-Output Nonlinear Plant
+m%% Model Predictive Control of a Multi-Input Multi-Output Nonlinear Plant
 % This example shows how to design a model predictive controller for a
 % multi-input multi-output nonlinear plant defined in Simulink(R) and 
 % simulate the closed loop. The plant has three manipulated variables and 
