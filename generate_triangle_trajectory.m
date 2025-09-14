@@ -1,6 +1,6 @@
 num_points = 3000; 
 points_per_side = num_points /3; 
-z_value = 1.5; 
+z_value = 0; 
 
 p1 = [0,0]; 
 p2 = [1.5, sqrt(3)*1.5];
